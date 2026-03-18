@@ -1,14 +1,23 @@
-pipeline {
-	agent {
-       label 'slave'
-	}
-   
-	stages {
-		stage('Git Checkout') {
-			steps {
-				git 'https://github.com/Chandandhani/loginapp.git'   
-			}
-		}
-	}   
-	  
+pipeline{
+    agent {
+        label 'slave'
+    }
+    stages {
+        stage('git clone') {
+            steps {
+                script {
+                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Chandandhani/loginapp.git']])
+                }
+            }
+        }
+        stage('Maven Build') {
+            steps {
+                script {
+                    withMaven(jdk: 'java_8', maven: 'maven_3.5.4', mavenSettingsConfig: '5e8783c1-76a0-49c1-b5c3-0c06f352bbd5') {
+                        sh 'mvn validate test clean install'
+                    }
+                }
+            }
+        }
+    }
 }
