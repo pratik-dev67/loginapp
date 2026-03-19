@@ -1,0 +1,10 @@
+{
+  "DEV": {
+    "dev102": "enabled",
+    "dev104": "enabled"
+  },
+  "PROD": {
+    "dev103": "enabled",
+    "dev105": "enabled"
+  }
+}
