@@ -5,6 +5,7 @@
   },
   "PROD": {
     "dev103": "enabled",
-    "dev105": "enabled"
+    "dev105": "enabled",
+    "dev107": "enabled"
   }
 }
