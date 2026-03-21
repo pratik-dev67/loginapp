@@ -89,15 +89,15 @@
     <!-- For RELEASE version -->
     <repository>
         <id>deploymentRepo</id>
-        <name>MSP_RELEASE</name>
-        <url>http://192.168.56.12:8081/repository/MSP_RELEASE/</url>
+        <name>JSP_RELEASE</name>
+        <url>http://192.168.56.12:8081/repository/JSP_RELEASE/</url>
     </repository>
 
     <!-- For SNAPSHOT version -->
     <snapshotRepository>
         <id>deploymentRepo</id>
-        <name>MSP_SNAPSHOT</name>
-        <url>http://192.168.56.12:8081/repository/MSP_SNAPSHOT/</url>
+        <name>JSP_SNAPSHOT</name>
+        <url>http://192.168.56.12:8081/repository/JSP_SNAPSHOT/</url>
     </snapshotRepository>
 
 </distributionManagement>
