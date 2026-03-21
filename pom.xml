@@ -84,6 +84,24 @@
 
 	</dependencies>
 	
+	<distributionManagement>
+
+    <!-- For RELEASE version -->
+    <repository>
+        <id>deploymentRepo</id>
+        <name>MSP_RELEASE</name>
+        <url>http://192.168.56.12:8081/repository/MSP_RELEASE/</url>
+    </repository>
+
+    <!-- For SNAPSHOT version -->
+    <snapshotRepository>
+        <id>deploymentRepo</id>
+        <name>MSP_SNAPSHOT</name>
+        <url>http://192.168.56.12:8081/repository/MSP_SNAPSHOT/</url>
+    </snapshotRepository>
+
+</distributionManagement>
+
 	
 	<build>
 		<!-- <finalName>AccountLogin</finalName> -->
