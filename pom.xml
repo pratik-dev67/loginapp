@@ -102,6 +102,55 @@
 
 </distributionManagement>
 
+
+	<profiles>
+
+    <!-- DEV -->
+    <profile>
+        <id>dev</id>
+        <properties>
+            <env.name>dev</env.name>
+        </properties>
+        <distributionManagement>
+            <snapshotRepository>
+                <id>deploymentRepo</id>
+                <name>JSP_SNAPSHOT</name>
+                <url>http://192.168.56.12:8081/repository/JSP_SNAPSHOT/</url>
+            </snapshotRepository>
+        </distributionManagement>
+    </profile>
+
+    <!-- QA -->
+    <profile>
+        <id>qa</id>
+        <properties>
+            <env.name>qa</env.name>
+        </properties>
+        <distributionManagement>
+            <repository>
+                <id>deploymentRepo</id>
+                <name>JSP_QA</name>
+                <url>http://192.168.56.12:8081/repository/JSP_QA/</url>
+            </repository>
+        </distributionManagement>
+    </profile>
+
+    <!-- PROD -->
+    <profile>
+        <id>prod</id>
+        <properties>
+            <env.name>prod</env.name>
+        </properties>
+        <distributionManagement>
+            <repository>
+                <id>deploymentRepo</id>
+                <name>JSP_RELEASE</name>
+                <url>http://192.168.56.12:8081/repository/JSP_RELEASE/</url>
+            </repository>
+        </distributionManagement>
+    </profile>
+
+</profiles>
 	
 	<build>
 		<!-- <finalName>AccountLogin</finalName> -->
