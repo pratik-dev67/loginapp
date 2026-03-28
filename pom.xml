@@ -9,7 +9,7 @@
 	<groupId>com.login</groupId>
 	<artifactId>AccountLogin</artifactId>
 	<packaging>war</packaging>
-	<version>6.0.0</version> <!-- FIXED -->
+	<version>7.0.0</version> <!-- FIXED -->
 	<name>SpringSecurity Custom Login Form XML</name>
 
 	<properties>
