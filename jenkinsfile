@@ -29,6 +29,15 @@ pipeline{
                     }
                 }
             }
+            stage('Docker build'){
+                steps{
+                    script{
+                        sh '''
+                            docker build -t 192.168.56.12:8085/jsp-docker/flask_backend_app:${RELEASE_VERSION}
+                        '''
+                    }
+                }
+            }
             // stage('SonarQube analysis') {
             //     steps {
             //         script {
