@@ -33,6 +33,7 @@ pipeline{
                 steps{
                     script{
                         sh '''
+                            docker login 192.168.56.12:8085 -u admin -p DevopsAdmin@1234$%
                             docker build -t 192.168.56.12:8085/jsp-docker/flask_backend_app:${RELEASE_VERSION} .
                             docker push 192.168.56.12:8085/jsp-docker/flask_backend_app:${RELEASE_VERSION}
                         '''
