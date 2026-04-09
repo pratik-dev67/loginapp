@@ -2,6 +2,10 @@ pipeline{
     agent {
         label 'slave'
     }
+    environment {
+        SONAR_SCANNER_HOME = tool 'SonarQubeScanner'
+    }
+    
     stages {
         stage('git clone') {
             steps {
@@ -13,11 +17,35 @@ pipeline{
         stage('Maven Build') {
             steps {
                 script {
-                    withMaven(jdk: 'java_8', maven: 'maven_3.5.4', mavenSettingsConfig: '5e8783c1-76a0-49c1-b5c3-0c06f352bbd5') {
-                        sh 'mvn validate test clean install'
+                    withCredentials([usernamePassword(credentialsId: 'jsp_creds', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
+                        withMaven(jdk: 'java_8', maven: 'maven_3.5.4', mavenSettingsConfig: '5e8783c1-76a0-49c1-b5c3-0c06f352bbd5') {
+                             sh '''
+                                    export USER=${USER}
+                                    export PASSWORD=${PASSWORD}
+                                    //mvn clean install -DskipTests deploy -Pdev
+                                    mvn clean install -DskipTests -Pdev
+                                '''
+                            }
+                        }
                     }
                 }
             }
+            // stage('SonarQube analysis') {
+            //     steps {
+            //         script {
+            //             withCredentials([string(credentialsId: 'Sonar_Server', variable: 'SONAR_TOKEN')]) {
+            //                 withSonarQubeEnv('SonarQubeServer') {
+            //                     sh """
+            //                         ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+            //                         -Dsonar.projectKey=LoginApp \
+            //                         -Dsonar.sources=. \
+            //                         -Dsonar.host.url=http://192.168.56.11:9000/ \
+            //                         -Dsonar.token=${SONAR_TOKEN}
+            //                     """
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
         }
-    }
-}
+   }
