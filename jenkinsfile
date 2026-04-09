@@ -22,7 +22,6 @@ pipeline{
                              sh '''
                                     export USER=${USER}
                                     export PASSWORD=${PASSWORD}
-                                    //mvn clean install -DskipTests deploy -Pdev
                                     mvn clean install -DskipTests -Pdev
                                 '''
                             }
