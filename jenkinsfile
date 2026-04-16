@@ -1,62 +1,24 @@
-pipeline{
+pipeline {
     agent {
         label 'slave'
     }
-    environment {
-        SONAR_SCANNER_HOME = tool 'SonarQubeScanner'
-    }
-    
+
     stages {
-        stage('git clone') {
+        stage('Git clone') {
             steps {
-                script {
-                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Chandandhani/loginapp.git']])
+                 script{
+                    checkout scmGit (branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/pratik-dev67/loginapp.git']])
                 }
             }
         }
-        stage('Maven Build') {
+        stage('Maven build') {
             steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'jsp_creds', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
-                        withMaven(jdk: 'java_8', maven: 'maven_3.5.4', mavenSettingsConfig: '5e8783c1-76a0-49c1-b5c3-0c06f352bbd5') {
-                             sh '''
-                                    export USER=${USER}
-                                    export PASSWORD=${PASSWORD}
-                                    mvn clean install -DskipTests -Pdev
-                                '''
-                            }
-                        }
-                    }
+                 script{
+                     withMaven(jdk: 'java_8', maven: 'maven_3.6.3', mavenSettingsConfig: '72ca9a61-bef6-4662-aa91-8bbe5cc098b4', traceability: true) {
+                         sh 'mvn validate test clean install'    
+                    }   
                 }
             }
-            stage('Docker build'){
-                steps{
-                    script{
-                        sh '''
-                            docker login 192.168.56.12:8085 -u admin -p DevopsAdmin@1234$%
-                            docker build -t 192.168.56.12:8085/jsp-docker/flask_backend_app:${RELEASE_VERSION} .
-                            docker push 192.168.56.12:8085/jsp-docker/flask_backend_app:${RELEASE_VERSION}
-                           docker system prune -a -f
-                        '''
-                    }
-                }
-            }
-            // stage('SonarQube analysis') {
-            //     steps {
-            //         script {
-            //             withCredentials([string(credentialsId: 'Sonar_Server', variable: 'SONAR_TOKEN')]) {
-            //                 withSonarQubeEnv('SonarQubeServer') {
-            //                     sh """
-            //                         ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-            //                         -Dsonar.projectKey=LoginApp \
-            //                         -Dsonar.sources=. \
-            //                         -Dsonar.host.url=http://192.168.56.11:9000/ \
-            //                         -Dsonar.token=${SONAR_TOKEN}
-            //                     """
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
         }
-   }
+    }
+}
