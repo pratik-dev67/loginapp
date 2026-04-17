@@ -1,11 +1,14 @@
 {
   "DEV": {
     "dev102": "enabled",
-    "dev104": "enabled"
+    "dev104": "enabled",
+    "dev106": "enabled",
+    "dev108": "enabled"
   },
   "PROD": {
     "dev103": "enabled",
     "dev105": "enabled",
-    "dev107": "enabled"
+    "dev107": "enabled",
+    "dev109": "enabled"
   }
 }
