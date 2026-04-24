@@ -73,6 +73,23 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 </dependency>
 
 </dependencies>
+		<distributionManagement>
+
+    <!-- For RELEASE version -->
+    <repository>
+        <id>deploymentRepo</id>
+        <name>JSP_RELEASE</name>
+        <url></url>
+    </repository>
+
+    <!-- For SNAPSHOT version -->
+    <snapshotRepository>
+        <id>deploymentRepo</id>
+        <name>JSP_SNAPSHOT</name>
+        <url></url>
+    </snapshotRepository>
+
+</distributionManagement>
 
 
 <build>
